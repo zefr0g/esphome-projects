@@ -1,14 +1,20 @@
-api: null
-captive_portal: null
 esphome:
-  board: nodemcuv2
   name: livingroom
   platform: ESP8266
-logger: null
-ota: null
+  board: nodemcuv2
+
 wifi:
+  ssid: !secret livingroom_ssid
+  password: !secret livingroom_password
   ap:
-    password: !secret 'livingroom_fallback_password'
-    ssid: !secret 'livingroom_fallback_ssid'
-  password: !secret 'livingroom_password'
-  ssid: !secret 'livingroom_ssid'
+    ssid: !secret livingroom_fallback_ssid
+    password: !secret livingroom_fallback_password
+
+api:
+
+ota:
+
+logger:
+
+captive_portal:
+

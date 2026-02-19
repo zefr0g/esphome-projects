@@ -1,107 +1,22 @@
-api: null
-button:
-- name: Restart ${friendly_name}
-  platform: restart
-climate:
-- auto_sub_mode_sensor:
-    disabled_by_default: true
-    entity_category: diagnostic
-    name: Auto Sub Mode
-  compressor_frequency_sensor:
-    disabled_by_default: true
-    entity_category: diagnostic
-    name: Compressor Frequency
-  debounce_delay: 100ms
-  horizontal_vane_select:
-    disabled_by_default: true
-    name: Horizontal Vane
-  icon: mdi:heat-pump
-  id: hpcouloir
-  input_power_sensor:
-    disabled_by_default: true
-    name: Input Power
-  isee_sensor:
-    disabled_by_default: true
-    name: ISEE Sensor
-  kwh_sensor:
-    disabled_by_default: true
-    name: Energy Usage
-  name: ${friendly_name}
-  outside_air_temperature_sensor:
-    disabled_by_default: true
-    name: Outside Air Temp
-  platform: cn105
-  remote_temperature_timeout: 30min
-  runtime_hours_sensor:
-    disabled_by_default: true
-    entity_category: diagnostic
-    name: Runtime Hours
-  stage_sensor:
-    disabled_by_default: true
-    entity_category: diagnostic
-    name: Stage
-  sub_mode_sensor:
-    disabled_by_default: true
-    entity_category: diagnostic
-    name: Sub Mode
-  update_interval: 2s
-  vertical_vane_select:
-    disabled_by_default: false
-    name: Vertical Vane
-  visual:
-    max_temperature: 31
-    min_temperature: 10
-    temperature_step:
-      current_temperature: 0.1
-      target_temperature: 0.5
+substitutions:
+  name: mitsucouloir
+  friendly_name: mitsucouloir
+  climate_id: hpcouloir
+  remote_temp_sensor: sensor.temperature_couloir
+  tx_pin: TX
+  rx_pin: RX
+
+packages:
+  core: !include common/core.yaml
+  wifi: !include common/wifi.yaml
+  mitsubishi: !include common/mitsubishi.yaml
+
+esphome:
+  name: ${name}
+
 esp8266:
   board: esp01_1m
-esphome:
-  name: mitsucouloir
-external_components:
-- source: github://echavet/MitsubishiCN105ESPHome@main
+
 logger:
   hardware_uart: UART1
   level: INFO
-ota:
-  platform: esphome
-sensor:
-- device_class: temperature
-  disabled_by_default: true
-  entity_id: ${remote_temp_sensor}
-  filters:
-  - clamp:
-      ignore_out_of_range: true
-      max_value: 40
-      min_value: 1
-  - throttle: 30s
-  internal: false
-  name: Remote Temperature Sensor
-  on_value:
-    then:
-    - logger.log:
-        args:
-        - x
-        format: 'Remote temperature received from HA: %.1f C'
-        level: INFO
-    - lambda: id(hpcouloir).set_remote_temperature(x);
-  platform: homeassistant
-  state_class: measurement
-  unit_of_measurement: °C
-- name: Uptime
-  platform: uptime
-  type: seconds
-substitutions:
-  friendly_name: Clim Couloir
-  remote_temp_sensor: sensor.atc_9d9d_temperature
-time:
-- id: homeassistant_time
-  platform: homeassistant
-uart:
-  baud_rate: 2400
-  id: HP_UART
-  rx_pin: 3
-  tx_pin: 1
-wifi:
-  password: !secret 'wifi_password'
-  ssid: !secret 'wifi_ssid'

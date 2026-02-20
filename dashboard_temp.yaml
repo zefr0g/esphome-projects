@@ -1,0 +1,141 @@
+views:
+  - title: Home
+    cards:
+      - title: Salon
+        type: vertical-stack
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                entities:
+                  - entity: sensor.atc_0d03_temperature
+                    name: Temp.
+              - type: custom:mini-graph-card
+                entities:
+                  - entity: sensor.atc_0d03_humidity
+                    name: Humidité
+                    color: '#1e5eee'
+          - type: custom:mushroom-climate-card
+            primary_info: state
+            secondary_info: last-changed
+            entity: climate.clim_salon
+            show_temperature_control: true
+            hvac_modes:
+              - 'off'
+              - heat
+              - dry
+              - cool
+              - fan_only
+      - title: Cuisine
+        type: horizontal-stack
+        cards:
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.atc_8477_temperature
+                name: Temp.
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.atc_8477_humidity
+                name: Humidité
+                color: '#1e5eee'
+      - type: vertical-stack
+        title: Chambre 1
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                entities:
+                  - entity: sensor.atc_9d9d_temperature
+                    name: Temp.
+              - type: custom:mini-graph-card
+                entities:
+                  - entity: sensor.atc_9d9d_humidity
+                    name: Humidité
+                    color: '#1e5eee'
+          - type: custom:mushroom-climate-card
+            entity: climate.radiateur_ch1
+            show_temperature_control: true
+            hvac_modes:
+              - heat
+              - 'off'
+      - type: vertical-stack
+        title: Chambre 2
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                entities:
+                  - entity: sensor.atc_501e_temperature
+                    name: Temp.
+              - type: custom:mini-graph-card
+                entities:
+                  - entity: sensor.atc_501e_humidity
+                    name: Humidité
+                    color: '#1e5eee'
+          - type: custom:mushroom-climate-card
+            entity: climate.radiateur_ch2
+            show_temperature_control: true
+            hvac_modes:
+              - heat
+              - 'off'
+      - type: vertical-stack
+        title: Chambre 3
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                entities:
+                  - entity: sensor.atc_63738e_738e_temperature
+                    name: Temp.
+              - type: custom:mini-graph-card
+                entities:
+                  - entity: sensor.atc_63738e_738e_humidity
+                    name: Humidité
+                    color: '#1e5eee'
+          - type: custom:mushroom-climate-card
+            entity: climate.radiateur_ch3
+            show_temperature_control: true
+            hvac_modes:
+              - heat
+              - 'off'
+      - type: vertical-stack
+        title: Salle de bain
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                entities:
+                  - entity: sensor.atc_335e_temperature
+                    name: Temp.
+              - type: custom:mini-graph-card
+                entities:
+                  - entity: sensor.atc_335e_humidity
+                    name: Humidité
+                    color: '#1e5eee'
+          - type: custom:mushroom-climate-card
+            entity: climate.radiateur_sdb
+            show_temperature_control: true
+            hvac_modes:
+              - heat
+              - 'off'
+      - type: vertical-stack
+        title: Garage
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                entities:
+                  - entity: sensor.garage_temperature
+                    name: Temp.
+              - type: custom:mini-graph-card
+                entities:
+                  - entity: sensor.garage_humidity
+                    name: Humidité
+                    color: '#1e5eee'
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.garage_pressure
+                name: Pression Atmo
+            show:
+              graph: bar
+            line_color: '#7e69f9'

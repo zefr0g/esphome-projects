@@ -53,7 +53,7 @@ views:
                     name: Humidité
                     color: '#1e5eee'
           - type: custom:mushroom-climate-card
-            entity: climate.radiateur_ch1
+            entity: climate.maxpilot_ch1_radiateur_ch1
             show_temperature_control: true
             hvac_modes:
               - heat
@@ -73,7 +73,7 @@ views:
                     name: Humidité
                     color: '#1e5eee'
           - type: custom:mushroom-climate-card
-            entity: climate.radiateur_ch2
+            entity: climate.maxpilot_ch2_radiateur_ch2
             show_temperature_control: true
             hvac_modes:
               - heat
@@ -93,7 +93,7 @@ views:
                     name: Humidité
                     color: '#1e5eee'
           - type: custom:mushroom-climate-card
-            entity: climate.radiateur_ch3
+            entity: climate.maxpilot_ch3_radiateur_ch3
             show_temperature_control: true
             hvac_modes:
               - heat
@@ -113,7 +113,7 @@ views:
                     name: Humidité
                     color: '#1e5eee'
           - type: custom:mushroom-climate-card
-            entity: climate.radiateur_sdb
+            entity: climate.maxpilot_sdb_radiateur_sdb
             show_temperature_control: true
             hvac_modes:
               - heat

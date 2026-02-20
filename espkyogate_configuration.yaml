@@ -1,6 +1,6 @@
 # espkyogate - ESPHome custom component for Bentel KYO alarms (https://github.com/lorenzo-deluca/espkyogate)
 # 2025 Lorenzo De Luca (me@lorenzodeluca.dev)
-# Example YAML for Bentel Kyo32-32G-8W-8WG
+# Configuration for Bentel Kyo32G on Wemos D1 Mini (ESP8266)
 
 external_components:
   - source:
@@ -14,7 +14,7 @@ esp8266:
 
 esphome:
   name: espkyogate
-  friendly_name: espkyogate
+  comment: Bentel KYO alarm serial bridge
   includes:
     - components/bentel-kyo/bentel_kyo32.h
 
@@ -24,30 +24,31 @@ uart:
   rx_pin: GPIO4
   baud_rate: 9600
   data_bits: 8
-  parity: EVEN  
+  parity: EVEN
 
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
   power_save_mode: none
-  ap:
-    ssid: "Fallback Hotspot"
-    password: !secret fallback_password
 
 captive_portal:
 
 logger:
-  level: DEBUG
+  level: INFO
+  baud_rate: 0
+  logs:
+    component: ERROR
 
 api:
   encryption:
     key: !secret api_encryption_key
   custom_services: true
+  reboot_timeout: 15min
 
 ota:
   - platform: esphome
     password: !secret ota_password
-  
+
 switch:
   - platform: safe_mode
     name: "ESPKyoGate (Safe Mode)"
@@ -62,36 +63,45 @@ binary_sensor:
         kyo32->stato_sirena,
         kyo32->warn_batteria_bassa,
         &kyo32->allarme_area[0],
-        &kyo32->zona[0], 
+        &kyo32->zona[0],
         &kyo32->zona[1],
-        &kyo32->zona[2], 
-        &kyo32->zona[3]
+        &kyo32->zona[2],
+        &kyo32->zona[3],
+        &kyo32->inserimento_totale_area[0],
+        &kyo32->inserimento_parziale_area[0],
+        &kyo32->disinserita_area[0]
       };
     binary_sensors:
       - id: kyo_comunication
-        name: "Communication centrale"
+        name: "Alarme Communication centrale"
       - id: stato_sirena
-        name: "Etat sirene"
+        name: "Alarme Etat sirene"
       - id: warn_batteria_bassa
-        name: "Batterie faible"
+        name: "Alarme Batterie faible"
       - id: allarme_area_1
-        name: "Alarme générale"
+        name: "Alarme generale"
       - id: kyo_zone1
-        name: "Cuisine"
-        device_class: "door"
+        name: "Alarme Cuisine"
+        device_class: door
       - id: kyo_zone2
-        name: "Entree"
-        device_class: "door"
+        name: "Alarme Entree"
+        device_class: door
       - id: kyo_zone3
-        name: "Couloir"
-        device_class: "motion"
+        name: "Alarme Couloir"
+        device_class: motion
       - id: kyo_zone4
-        name: "Salon"
-        device_class: "motion"
+        name: "Alarme Salon"
+        device_class: motion
+      - id: arm_total_area_1
+        name: "Alarme Armement total"
+      - id: arm_partial_area_1
+        name: "Alarme Armement partiel"
+      - id: disarmed_area_1
+        name: "Alarme Desarme"
 
 sensor:
   - platform: uptime
-    name: "Uptime Sensor"
+    name: "Uptime"
   - platform: wifi_signal
     name: "WiFi Signal"
 

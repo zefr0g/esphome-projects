@@ -2,12 +2,12 @@ views:
   - title: Home
     cards:
       - type: vertical-stack
-        title: Alarme
+        title: Alarme Bentel
         cards:
           - type: horizontal-stack
             cards:
               - type: button
-                name: Armer
+                name: Armer Total
                 tap_action:
                   action: call-service
                   service: esphome.espkyogate_arm_area
@@ -18,9 +18,24 @@ views:
                 show_state: false
                 show_icon: true
                 show_name: true
-                icon: mdi:shield-home-outline
+                icon: mdi:shield-lock-outline
+                icon_height: 30px
               - type: button
-                name: Désarmer
+                name: Armer Partiel
+                tap_action:
+                  action: call-service
+                  service: esphome.espkyogate_arm_area
+                  service_data:
+                    arm_type: 2
+                    area: 1
+                    specific_area: 0
+                show_state: false
+                show_icon: true
+                show_name: true
+                icon: mdi:shield-home-outline
+                icon_height: 30px
+              - type: button
+                name: Desarmer
                 tap_action:
                   action: call-service
                   service: esphome.espkyogate_disarm_area
@@ -29,18 +44,40 @@ views:
                     specific_area: 0
                 show_state: false
                 show_icon: true
-                icon: mdi:alarm-note-off
-          - type: entities
+                show_name: true
+                icon: mdi:shield-off-outline
+                icon_height: 30px
+          - type: glance
+            title: Etat systeme
+            show_name: true
+            show_state: true
             entities:
+              - entity: binary_sensor.espkyogate_alarme_armement_total
+                name: Total
+              - entity: binary_sensor.espkyogate_alarme_armement_partiel
+                name: Partiel
+              - entity: binary_sensor.espkyogate_alarme_desarme
+                name: Desarme
               - entity: binary_sensor.espkyogate_alarme_generale
-              - entity: binary_sensor.espkyogate_etat_sirene
-              - entity: binary_sensor.espkyogate_entree
+                name: Alarme
+          - type: entities
+            title: Zones
+            entities:
+              - entity: binary_sensor.espkyogate_alarme_entree
                 secondary_info: last-updated
-              - entity: binary_sensor.espkyogate_cuisine
+              - entity: binary_sensor.espkyogate_alarme_cuisine
                 secondary_info: last-updated
-              - entity: binary_sensor.espkyogate_couloir
+              - entity: binary_sensor.espkyogate_alarme_couloir
                 secondary_info: last-updated
-              - entity: binary_sensor.espkyogate_salon
+              - entity: binary_sensor.espkyogate_alarme_salon
                 secondary_info: last-updated
+            state_color: true
+            show_header_toggle: false
+          - type: entities
+            title: Diagnostics
+            entities:
+              - entity: binary_sensor.espkyogate_alarme_communication_centrale
+              - entity: binary_sensor.espkyogate_alarme_etat_sirene
+              - entity: binary_sensor.espkyogate_alarme_batterie_faible
             state_color: true
             show_header_toggle: false

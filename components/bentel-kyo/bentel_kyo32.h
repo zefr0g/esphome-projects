@@ -59,11 +59,9 @@ class Bentel_Kyo32 : public esphome::PollingComponent, public uart::UARTDevice, 
 
 		BinarySensor* stato_uscita = new BinarySensor[KYO_MAX_USCITE];
 
-		                void setup() override
-		                {
-		                        ESP_LOGI("Bentel_Kyo32", "Setup starting...");
-		                        set_update_interval(UPDATE_INT_MS);
-		
+		void setup() override
+		{
+ 			set_update_interval(UPDATE_INT_MS);
             set_setup_priority(setup_priority::AFTER_CONNECTION);
 
 			register_service(&Bentel_Kyo32::arm_area, "arm_area", {"area", "arm_type", "specific_area"});
@@ -359,12 +357,12 @@ class Bentel_Kyo32 : public esphome::PollingComponent, public uart::UARTDevice, 
 		// END COMMANDS 
 		// ========================================= 
 		
-		                                                void update() override
-		                                                {
-		                                                        ESP_LOGD("Bentel_Kyo32", "Update cycle running, polling_kyo: %i", this->polling_kyo);
-		                                                        if (!this->polling_kyo)
-		                                                                return;
-		                			switch(this->pollingState)
+		void update() override
+		{
+			if (!this->polling_kyo)
+				return;
+
+			switch(this->pollingState)
 			{
 				case PollingStateEnum::Init:
 					if (this->update_kyo_status())
@@ -418,9 +416,8 @@ class Bentel_Kyo32 : public esphome::PollingComponent, public uart::UARTDevice, 
 		enum class PartitionStatusEnum { Idle = 1, Exclude, MemAlarm, MemSabotate};
 		PartitionStatusEnum PartitionStatusInternal[KYO_MAX_ZONE];
 
-		            bool serialTrace = true;
-		            bool logTrace = true;
-		
+		bool serialTrace = false;
+		bool logTrace = false;
 		bool polling_kyo = true;
 		int centralInvalidMessageCount = 0;
 		int MaxZone = KYO_MAX_ZONE;
@@ -631,9 +628,10 @@ class Bentel_Kyo32 : public esphome::PollingComponent, public uart::UARTDevice, 
 						StatoZona = (Rx[9] >> i) & 1;
 				}
 
-				                                if (this->logTrace && (StatoZona == 1) != zona[i].state)
-				                                        ESP_LOGI("Bentel_Kyo32", "Zone %i changed to %i", i + 1, StatoZona);
-								zona[i].publish_state(StatoZona==1);
+				if (this->logTrace && (StatoZona == 1) != zona[i].state)	
+					ESP_LOGI("stato_zona", "Zona %i - Stato %i", i, StatoZona);
+
+				zona[i].publish_state(StatoZona==1);
 			}
 
 			// Ciclo SABOTAGGIO ZONE

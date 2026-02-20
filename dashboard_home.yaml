@@ -567,12 +567,30 @@ views:
                         .flex {
                           padding: 5px;
                         }
-                  - type: custom:mushroom-climate-card
-                    entity: climate.radiateur_ch1
-                    show_temperature_control: true
-                    hvac_modes:
-                      - heat
-                      - 'off'
+                  - type: custom:mushroom-chips-card
+                    alignment: center
+                    chips:
+                      - type: template
+                        entity: climate.maxpilot_ch1_radiateur_ch1
+                        icon: mdi:radiator
+                        icon_color: >-
+                          {% if state_attr('climate.maxpilot_ch1_radiateur_ch1', 'hvac_action') == 'heating' %}
+                            red
+                          {% elif is_state('climate.maxpilot_ch1_radiateur_ch1', 'heat') %}
+                            orange
+                          {% else %}
+                            grey
+                          {% endif %}
+                        content: >-
+                          {{ state_attr('climate.maxpilot_ch1_radiateur_ch1', 'temperature') | int }}°C
+                        tap_action:
+                          action: more-info
+                    card_mod:
+                      style: |
+                        ha-card {
+                          --chip-spacing: 0;
+                          padding: 0 8px 4px 8px !important;
+                        }
               - type: custom:stack-in-card
                 mode: vertical
                 cards:
@@ -603,12 +621,30 @@ views:
                         .flex {
                           padding: 5px;
                         }
-                  - type: custom:mushroom-climate-card
-                    entity: climate.radiateur_ch2
-                    show_temperature_control: true
-                    hvac_modes:
-                      - heat
-                      - 'off'
+                  - type: custom:mushroom-chips-card
+                    alignment: center
+                    chips:
+                      - type: template
+                        entity: climate.maxpilot_ch2_radiateur_ch2
+                        icon: mdi:radiator
+                        icon_color: >-
+                          {% if state_attr('climate.maxpilot_ch2_radiateur_ch2', 'hvac_action') == 'heating' %}
+                            red
+                          {% elif is_state('climate.maxpilot_ch2_radiateur_ch2', 'heat') %}
+                            orange
+                          {% else %}
+                            grey
+                          {% endif %}
+                        content: >-
+                          {{ state_attr('climate.maxpilot_ch2_radiateur_ch2', 'temperature') | int }}°C
+                        tap_action:
+                          action: more-info
+                    card_mod:
+                      style: |
+                        ha-card {
+                          --chip-spacing: 0;
+                          padding: 0 8px 4px 8px !important;
+                        }
           - type: horizontal-stack
             cards:
               - type: custom:stack-in-card
@@ -641,12 +677,30 @@ views:
                         .flex {
                           padding: 5px;
                         }
-                  - type: custom:mushroom-climate-card
-                    entity: climate.radiateur_ch3
-                    show_temperature_control: true
-                    hvac_modes:
-                      - heat
-                      - 'off'
+                  - type: custom:mushroom-chips-card
+                    alignment: center
+                    chips:
+                      - type: template
+                        entity: climate.maxpilot_ch3_radiateur_ch3
+                        icon: mdi:radiator
+                        icon_color: >-
+                          {% if state_attr('climate.maxpilot_ch3_radiateur_ch3', 'hvac_action') == 'heating' %}
+                            red
+                          {% elif is_state('climate.maxpilot_ch3_radiateur_ch3', 'heat') %}
+                            orange
+                          {% else %}
+                            grey
+                          {% endif %}
+                        content: >-
+                          {{ state_attr('climate.maxpilot_ch3_radiateur_ch3', 'temperature') | int }}°C
+                        tap_action:
+                          action: more-info
+                    card_mod:
+                      style: |
+                        ha-card {
+                          --chip-spacing: 0;
+                          padding: 0 8px 4px 8px !important;
+                        }
               - type: custom:stack-in-card
                 mode: vertical
                 cards:
@@ -677,12 +731,30 @@ views:
                         .flex {
                           padding: 5px;
                         }
-                  - type: custom:mushroom-climate-card
-                    entity: climate.radiateur_sdb
-                    show_temperature_control: true
-                    hvac_modes:
-                      - heat
-                      - 'off'
+                  - type: custom:mushroom-chips-card
+                    alignment: center
+                    chips:
+                      - type: template
+                        entity: climate.maxpilot_sdb_radiateur_sdb
+                        icon: mdi:radiator
+                        icon_color: >-
+                          {% if state_attr('climate.maxpilot_sdb_radiateur_sdb', 'hvac_action') == 'heating' %}
+                            red
+                          {% elif is_state('climate.maxpilot_sdb_radiateur_sdb', 'heat') %}
+                            orange
+                          {% else %}
+                            grey
+                          {% endif %}
+                        content: >-
+                          {{ state_attr('climate.maxpilot_sdb_radiateur_sdb', 'temperature') | int }}°C
+                        tap_action:
+                          action: more-info
+                    card_mod:
+                      style: |
+                        ha-card {
+                          --chip-spacing: 0;
+                          padding: 0 8px 4px 8px !important;
+                        }
           - type: custom:scheduler-card
             include:
               - switch.valve_controller_switch

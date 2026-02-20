@@ -15,7 +15,7 @@ views:
                     arm_type: 1
                     area: 1
                     specific_area: 0
-                show_state: true
+                show_state: false
                 show_icon: true
                 show_name: true
                 icon: mdi:shield-home-outline
@@ -27,20 +27,20 @@ views:
                   service_data:
                     area: 1
                     specific_area: 0
-                show_state: true
+                show_state: false
                 show_icon: true
                 icon: mdi:alarm-note-off
           - type: entities
             entities:
-              - entity: binary_sensor.alarme_generale
-              - entity: binary_sensor.etat_sirene
-              - entity: binary_sensor.entree
+              - entity: binary_sensor.espkyogate_alarme_generale
+              - entity: binary_sensor.espkyogate_etat_sirene
+              - entity: binary_sensor.espkyogate_entree
                 secondary_info: last-updated
-              - entity: binary_sensor.cuisine
+              - entity: binary_sensor.espkyogate_cuisine
                 secondary_info: last-updated
-              - entity: binary_sensor.couloir
+              - entity: binary_sensor.espkyogate_couloir
                 secondary_info: last-updated
-              - entity: binary_sensor.salon
+              - entity: binary_sensor.espkyogate_salon
                 secondary_info: last-updated
             state_color: true
             show_header_toggle: false

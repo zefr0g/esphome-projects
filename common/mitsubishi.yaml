@@ -59,4 +59,9 @@ sensor:
     internal: true
     on_value:
       then:
-        - lambda: 'id(${climate_id}).set_remote_temperature(x);'
+        - logger.log:
+            level: INFO
+            format: "Remote temperature received from HA: %.1f C"
+            args: ["x"]
+        - lambda: "id(${climate_id}).set_remote_temperature(x);"
+

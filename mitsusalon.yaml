@@ -2,7 +2,7 @@ substitutions:
   name: mitsusalon
   friendly_name: mitsusalon
   climate_id: hpsalon
-  remote_temp_sensor: sensor.temperature_salon
+  remote_temp_sensor: sensor.atc_0d03_temperature
   tx_pin: TX
   rx_pin: RX
 
